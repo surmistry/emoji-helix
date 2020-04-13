@@ -1,8 +1,9 @@
 {
-  "name": "test",
+  "name": "helix-generator",
   "version": "1.0.0",
   "description": "",
-  "main": "test.js",
+  "main": "./bin/index.js",
+  "bin": "./bin/index.js",
   "dependencies": {
     "command-line-args": "^5.1.1"
   },
@@ -11,6 +12,6 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": [],
-  "author": "",
+  "author": "Suraj Mistry",
   "license": "ISC"
 }
