@@ -1,16 +1,11 @@
 
-
-const inputs = ['a', 'b', 'c', 'd'];
-
 const WIDTH_DEFAULT = 6;
-const helixWidth = ((inputs.length - 1) * WIDTH_DEFAULT + (inputs.length - 1));
-
 const DIR_FORWARD = 'forward';
 const DIR_BACKWARD = 'backward';
 
 const isEmpty = (arr) => !arr || (arr.length === 0);
 
-const fillTemplate = (indexes, width) => {
+const fillTemplate = (indexes, width, spacer) => {
   let updatedTemplate = [...new Array(width)].map((_, i) => '  ');
 
   for (let index of Object.keys(indexes)) {
@@ -19,7 +14,7 @@ const fillTemplate = (indexes, width) => {
   return updatedTemplate
 }
 
-const initializeMatrix = (inputs, width) => {
+const initializeMatrix = (inputs, width, spacer) => {
   let baseIndex = 0;
   let indexes = {};
   for (let character of inputs) {
@@ -27,7 +22,7 @@ const initializeMatrix = (inputs, width) => {
       character,
       (baseIndex === (width - 1)) ? DIR_BACKWARD : DIR_FORWARD
     ]
-    baseIndex += WIDTH_DEFAULT;
+    baseIndex += spacer;
   }
   let completeTemplate = fillTemplate(indexes, width);
   return { template: completeTemplate, indexes };
@@ -85,17 +80,23 @@ const checkFullCycle = (inputs, newLine, template) => {
   })
 }
 
-const { indexes, template } = initializeMatrix(inputs, helixWidth);
-let newIndexes = indexes;
-let matrix = [];
-let newLine = [];
-console.log(`Generating ${inputs.length}-helix strand`)
-matrix.push(template);
-while (!checkFullCycle(inputs, newLine, template)) {
-  newIndexes = incrementIndexes(newIndexes, helixWidth);
-  newLine = fillTemplate(newIndexes, helixWidth);
-  matrix.push(newLine);
+const generateTemplate = (inputs, width = WIDTH_DEFAULT) => {
+  const helixWidth = ((inputs.length - 1) * width + (inputs.length - 1));
+  const { indexes, template } = initializeMatrix(inputs, helixWidth, width);
+  let newIndexes = indexes;
+  let matrix = [];
+  let newLine = [];
+  console.log(`Generating ${inputs.length}-helix strand`)
+  matrix.push(template);
+  while (!checkFullCycle(inputs, newLine, template)) {
+    newIndexes = incrementIndexes(newIndexes, helixWidth);
+    newLine = fillTemplate(newIndexes, helixWidth);
+    matrix.push(newLine);
+  }
+  matrix.pop(newLine);
+
+  console.log(matrix.join('\n').replace(/,/g, ''));
+  return;
 }
 
-
-console.log(matrix)
+const matrix = generateTemplate(['🤡', '😡', '🤢'], 8)
