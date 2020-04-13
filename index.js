@@ -23,32 +23,35 @@ const optionDefinitions = [
 const options = commandLineArgs(optionDefinitions);
 
 const TEMPLATE_HELIX =
-  `01          02
- 01        02
-  01      02
-    01  02
-      01
-    02  01
-  02      01
- 02        01
-02          01
-02          01
- 02        01
-  02      01
-    02  01
-      02
-    01  02
-  01      02
- 01        02
-01          02
-`;
+  ` 01          02
+  01        02
+   01      02
+     01  02
+       01
+     02  01
+   02      01
+  02        01
+ 02          01
+ 02          01
+  02        01
+   02      01
+     02  01
+       02
+     01  02
+   01      02
+  01        02
+ 01          02
+ `;
 
 const { emojis, cycles } = options
 
 const output = emojis.reduce(
   (updatingHelix, helixValue, index) => {
     const target = index + 1;
-    let newHelix = updatingHelix.replace(new RegExp(`0${target}`, 'g'), helixValue)
+    let newHelix = updatingHelix.replace(
+      new RegExp(`0${target}`, 'g'),
+      helixValue
+    )
     return newHelix;
   },
   TEMPLATE_HELIX
@@ -57,4 +60,5 @@ const output = emojis.reduce(
 let outputHelix = '';
 for (let i = 0; i < cycles; i++)
   outputHelix += output;
+
 console.log(outputHelix);
