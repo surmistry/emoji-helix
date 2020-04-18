@@ -7,13 +7,13 @@ generate a string of any two characters in combination.
 
 Install globally to use anywhere and get CLI a output a desired helix combination.
 ```
-npm i -g surmistry/helix-generator
+npm i -g helix-generator
 ```
 
 
 Local installation can be done as follows.
 ```
-npm i -S surmistry/helix-generator
+npm i -S helix-generator
 ```
 
 <aside class="warning">Width works best with even numbers.</aside>
