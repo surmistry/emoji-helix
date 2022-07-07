@@ -1,5 +1,7 @@
 # helix generator
 
+[![npm version](https://badge.fury.io/js/helix-generator.svg)](https://badge.fury.io/js/helix-generator)
+
 generate a string of any two characters in combination.
 
 ## __installation__
